@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour | Cyrus Reigns Records</title>
+    <meta name="description" content="Tour dates and book Cyrus Reigns Records in your town. Full booking guide and pricing. Reigning over darkness.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="cr-page-loading">
+    <div class="cr-skeleton-loader" id="cr-skeleton-loader" aria-hidden="true">
+        <span class="cr-skeleton-loader__bar"></span>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top cr-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/cyrus-reigns-records_logo.svg" alt="Cyrus Reigns Records" class="cr-nav-logo cr-nav-logo--dark" height="36" width="auto">
+                <img src="assets/images/cyrus-reigns-records_logo_black.svg" alt="Cyrus Reigns Records" class="cr-nav-logo cr-nav-logo--light" height="36" width="auto">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="cr-navbar__wrap">
+                    <ul class="navbar-nav cr-navbar__nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="music.html">Music</a></li>
+                        <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="tour.html">Tour</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gospel.html">The Gospel</a></li>
+                    </ul>
+                    <div class="cr-navbar__right">
+                        <div id="theme-toggle" class="cr-theme-toggle" role="switch" aria-checked="false" aria-label="Toggle theme" tabindex="0">
+                            <span class="cr-theme-toggle__icon cr-theme-toggle__sun" aria-hidden="true"><i class="fas fa-sun"></i></span>
+                            <span class="cr-theme-toggle__track"><span class="cr-theme-toggle__thumb"></span></span>
+                            <span class="cr-theme-toggle__icon cr-theme-toggle__moon" aria-hidden="true"><i class="fas fa-moon"></i></span>
+                        </div>
+                        <a href="tour.html" class="btn btn-primary btn-sm cr-btn-tour">Tour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="flex-grow-1 cr-pattern-dots">
+        <div class="container pb-5">
+            <div class="cr-page-heading-wrap text-center mb-5">
+                <h1 class="cr-section-title mb-2">Tour</h1>
+                <p class="lead text-muted mb-0">Live dates. Pick your show, your tier, and come worship with us.</p>
+            </div>
+
+            <!-- Tour dates: list, timeline soonest first, dropdown ticket type (cheapest default), sold-out -->
+            <section class="cr-animate-on-scroll mb-5" id="tour-dates" aria-label="Tour dates">
+                <h2 class="cr-section-title text-center mb-4">Summer Europe Tour 2026</h2>
+                <p class="text-center text-muted mb-4 mx-auto" style="max-width: 40rem;">4 weeks. London, UK and Europe’s most popular venues. Pick a date, choose your ticket type (cheapest selected by default), add to cart.</p>
+
+                <ul class="cr-tour-list list-unstyled mx-auto" style="max-width: 52rem;">
+                    <!-- 1. London — soonest -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-06-06T19:00">06 JUN 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">Roundhouse</h2>
+                                    <p class="cr-tour-address mb-0">Chalk Farm Rd, London NW1 8EH, UK</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>6:30 PM doors · 7:30 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-london" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-london" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type London">
+                                    <option value="ga" selected>GA — €35</option>
+                                    <option value="vip">VIP — €89</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€35</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-london-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260606-london-ga" data-cart-name="Roundhouse, London — GA" data-cart-price="35">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, foundation room access, merch discount.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€89</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-london-vip" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity VIP">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260606-london-vip" data-cart-name="Roundhouse, London — VIP" data-cart-price="89">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople cr-tour-tier--soldout" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price me-2">€500</span>
+                                        <span class="cr-tour-soldout" aria-live="polite">Sold out</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 2. Paris -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-06-12T19:30">12 JUN 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">Olympia</h2>
+                                    <p class="cr-tour-address mb-0">28 Bd des Capucines, 75009 Paris, France</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>7:00 PM doors · 8:00 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-paris" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-paris" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type Paris">
+                                    <option value="ga" selected>GA — €38</option>
+                                    <option value="vip">VIP — €95</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€38</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-paris-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260612-paris-ga" data-cart-name="Olympia, Paris — GA" data-cart-price="38">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--soldout" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, reserved area, merch pack.</p>
+                                        <span class="cr-merch-price me-2">€95</span>
+                                        <span class="cr-tour-soldout" aria-live="polite">Sold out</span>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€500</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-paris-ourpeople" class="cr-ticket-qty form-control form-control-sm" min="1" max="4" value="1" data-tour-qty aria-label="Quantity Our People">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm cr-btn-ourpeople" data-cart-id="tour-20260612-paris-ourpeople" data-cart-name="Olympia, Paris — Our People" data-cart-price="500">Add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 3. Berlin -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-06-18T19:00">18 JUN 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">Columbiahalle</h2>
+                                    <p class="cr-tour-address mb-0">Columbiadamm 13-21, 10965 Berlin, Germany</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>6:30 PM doors · 7:30 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-berlin" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-berlin" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type Berlin">
+                                    <option value="ga" selected>GA — €35</option>
+                                    <option value="vip">VIP — €89</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€35</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-berlin-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260618-berlin-ga" data-cart-name="Columbiahalle, Berlin — GA" data-cart-price="35">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, balcony access, merch discount.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€89</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-berlin-vip" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity VIP">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260618-berlin-vip" data-cart-name="Columbiahalle, Berlin — VIP" data-cart-price="89">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€500</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-berlin-ourpeople" class="cr-ticket-qty form-control form-control-sm" min="1" max="4" value="1" data-tour-qty aria-label="Quantity Our People">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm cr-btn-ourpeople" data-cart-id="tour-20260618-berlin-ourpeople" data-cart-name="Columbiahalle, Berlin — Our People" data-cart-price="500">Add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 4. Amsterdam -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-06-24T19:00">24 JUN 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">Paradiso</h2>
+                                    <p class="cr-tour-address mb-0">Weteringschans 6-8, 1017 SG Amsterdam, Netherlands</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>7:00 PM doors · 8:00 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-amsterdam" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-amsterdam" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type Amsterdam">
+                                    <option value="ga" selected>GA — €36</option>
+                                    <option value="vip">VIP — €90</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€36</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-amsterdam-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260624-amsterdam-ga" data-cart-name="Paradiso, Amsterdam — GA" data-cart-price="36">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, balcony, merch discount.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€90</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-amsterdam-vip" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity VIP">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260624-amsterdam-vip" data-cart-name="Paradiso, Amsterdam — VIP" data-cart-price="90">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€500</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-amsterdam-ourpeople" class="cr-ticket-qty form-control form-control-sm" min="1" max="4" value="1" data-tour-qty aria-label="Quantity Our People">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm cr-btn-ourpeople" data-cart-id="tour-20260624-amsterdam-ourpeople" data-cart-name="Paradiso, Amsterdam — Our People" data-cart-price="500">Add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 5. Barcelona -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-06-28T20:00">28 JUN 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">Razzmatazz</h2>
+                                    <p class="cr-tour-address mb-0">C/ dels Almogàvers 122, 08018 Barcelona, Spain</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>8:00 PM doors · 9:00 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-barcelona" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-barcelona" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type Barcelona">
+                                    <option value="ga" selected>GA — €35</option>
+                                    <option value="vip">VIP — €85</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€35</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-barcelona-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260628-barcelona-ga" data-cart-name="Razzmatazz, Barcelona — GA" data-cart-price="35">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, VIP area, merch discount.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€85</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-barcelona-vip" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity VIP">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260628-barcelona-vip" data-cart-name="Razzmatazz, Barcelona — VIP" data-cart-price="85">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€500</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-barcelona-ourpeople" class="cr-ticket-qty form-control form-control-sm" min="1" max="4" value="1" data-tour-qty aria-label="Quantity Our People">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm cr-btn-ourpeople" data-cart-id="tour-20260628-barcelona-ourpeople" data-cart-name="Razzmatazz, Barcelona — Our People" data-cart-price="500">Add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 6. Dublin -->
+                    <li class="cr-tour-item" data-tour-row>
+                        <div class="cr-tour-item__inner">
+                            <div class="cr-tour-item__main">
+                                <time class="cr-tour-date" datetime="2026-07-04T19:00">04 JUL 2026</time>
+                                <div class="cr-tour-item__info">
+                                    <h2 class="cr-tour-venue">3Arena</h2>
+                                    <p class="cr-tour-address mb-0">North Wall Quay, Dublin 1, D01 T1W8, Ireland</p>
+                                    <p class="cr-tour-time mb-0"><i class="fas fa-clock me-1" aria-hidden="true"></i>6:30 PM doors · 7:30 PM show</p>
+                                </div>
+                            </div>
+                            <div class="cr-tour-item__divider" aria-hidden="true"></div>
+                            <div class="cr-tour-item__purchase">
+                                <div class="cr-tour-purchase-row cr-tour-purchase-row--type">
+                                    <label for="tier-dublin" class="cr-tour-purchase-label">Ticket type</label>
+                                    <select id="tier-dublin" class="form-select form-select-sm cr-tour-tier-select" data-tour-select aria-label="Ticket type Dublin">
+                                    <option value="ga" selected>GA — €40</option>
+                                    <option value="vip">VIP — €99</option>
+                                    <option value="ourpeople">Our People — €500</option>
+                                </select>
+                                </div>
+                                <div class="cr-tour-tier-panels">
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="ga">
+                                        <span class="cr-merch-price d-inline-block me-2">€40</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-dublin-ga" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity GA">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260704-dublin-ga" data-cart-name="3Arena, Dublin — GA" data-cart-price="40">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier" data-tier="vip" hidden>
+                                        <p class="small text-muted mb-1">Early entry, premium seat, merch pack.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€99</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-dublin-vip" class="cr-ticket-qty form-control form-control-sm" min="1" max="10" value="1" data-tour-qty aria-label="Quantity VIP">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-cart-id="tour-20260704-dublin-vip" data-cart-name="3Arena, Dublin — VIP" data-cart-price="99">Add to cart</button>
+                                        </div>
+                                    </div>
+                                    <div class="cr-tour-tier-panel cr-tour-tier cr-tour-tier--ourpeople" data-tier="ourpeople" hidden>
+                                        <p class="small mb-1">Soundcheck, backstage, meet & greet, autographs. All-in. For the faithful. Limited.</p>
+                                        <span class="cr-merch-price d-inline-block me-2">€500</span>
+                                        <div class="d-inline-flex gap-2 align-items-center flex-wrap">
+                                            <span class="small text-muted mb-0 me-1">Qty</span>
+                                            <div class="cr-tour-qty-wrap">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--minus" aria-label="Decrease">−</button>
+                                              <input type="number" id="qty-dublin-ourpeople" class="cr-ticket-qty form-control form-control-sm" min="1" max="4" value="1" data-tour-qty aria-label="Quantity Our People">
+                                              <button type="button" class="cr-tour-qty-btn cr-tour-qty-btn--plus" aria-label="Increase">+</button>
+                                            </div>
+                                            <button type="button" class="btn btn-primary btn-sm cr-btn-ourpeople" data-cart-id="tour-20260704-dublin-ourpeople" data-cart-name="3Arena, Dublin — Our People" data-cart-price="500">Add to cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <p class="text-center text-muted small mt-4">European summer tour · 4 weeks · no US dates. <a href="#book-us">Book us</a> for your venue or <a href="contact.html">get in touch</a>.</p>
+            </section>
+
+            <!-- Book us in your town -->
+            <section class="cr-animate-on-scroll mb-5" id="book-us" aria-label="Book us in your town">
+                <h2 class="cr-section-title text-center mb-4">Book Us in Your Town</h2>
+                <p class="text-center text-muted mb-4 mx-auto" style="max-width: 36rem;">Church, venue, or event — here’s everything you need to book Cyrus Reigns Records.</p>
+
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card cr-border-gold p-4 mb-4">
+                            <h3 class="h5 mb-3 cr-emphasis">Booking rate</h3>
+                            <p class="mb-0"><strong class="cr-merch-price">$15,000 per booking.</strong> One flat fee covers the performance. Travel, lodging, and technical requirements are outlined below.</p>
+                        </div>
+
+                        <div class="card cr-border-gold p-4 mb-4">
+                            <h3 class="h5 mb-3">How to book</h3>
+                            <ol class="mb-0 ps-3">
+                                <li class="mb-2"><strong>Email us</strong> at <a href="mailto:hello@cyrusreignsrecords.com">hello@cyrusreignsrecords.com</a> with the subject line “Booking request” and your venue name, city, and preferred date(s).</li>
+                                <li class="mb-2"><strong>We’ll reply</strong> within a few business days with availability and a simple agreement.</li>
+                                <li class="mb-2"><strong>Sign and deposit.</strong> A deposit (typically 50%) secures the date; the balance is due before or on the day of the show.</li>
+                                <li class="mb-2"><strong>Confirm details.</strong> We’ll agree on set length, sound check time, and any special requests (merch table, meet & greet, etc.).</li>
+                                <li class="mb-0"><strong>Show day.</strong> We arrive, set up, play, and leave your audience encouraged by the Word and the music.</li>
+                            </ol>
+                        </div>
+
+                        <div class="card cr-border-gold p-4 mb-4">
+                            <h3 class="h5 mb-3">What’s included</h3>
+                            <ul class="mb-0 ps-3">
+                                <li class="mb-2">Full band performance (set length agreed in advance).</li>
+                                <li class="mb-2">Professional sound within our rider (we can send a technical rider after your initial inquiry).</li>
+                                <li class="mb-2">Merchandise available for sale at the event (optional).</li>
+                                <li class="mb-0">Travel and lodging are the responsibility of the host (we’ll send a standard rider with requirements).</li>
+                            </ul>
+                        </div>
+
+                        <div class="card cr-border-gold p-4 mb-4">
+                            <h3 class="h5 mb-3">Technical & hosting</h3>
+                            <p class="mb-2">We’ll provide a technical rider (stage plot, input list, backline needs) after we confirm your date. Typical needs include a clear stage area, basic backline or DI options, and a competent sound engineer. For travel and lodging, we ask for hotel accommodations (or equivalent) for the band and crew for the night of the show (and travel nights when applicable).</p>
+                            <p class="mb-0 small text-muted">Exact details are in the rider we send upon booking confirmation.</p>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="contact.html" class="btn btn-primary btn-lg">Get in touch to book</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="cr-footer mt-auto">
+        <div class="cr-footer__bg" role="img" aria-hidden="true"></div>
+        <div class="cr-footer__top"></div>
+        <div class="container">
+            <div class="cr-footer__inner text-center">
+                <a href="index.html" class="cr-footer__logo-link" aria-label="Cyrus Reigns Records – Home">
+                    <img src="assets/images/cyrus-reigns-records_logo.svg" alt="" class="cr-footer__logo cr-footer__logo--dark" width="200" height="auto">
+                    <img src="assets/images/cyrus-reigns-records_logo_black.svg" alt="" class="cr-footer__logo cr-footer__logo--light" width="200" height="auto">
+                </a>
+                <p class="cr-footer__tagline">Reigning Over Darkness</p>
+                <div class="cr-footer__logo-divider" aria-hidden="true"></div>
+                <div class="cr-footer__social mb-4" aria-label="Social links">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    <a href="https://music.apple.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Apple Music"><i class="fab fa-apple"></i></a>
+                </div>
+                <div class="cr-footer__newsletter">
+                    <p class="cr-footer__newsletter-title mb-2">Subscribe to our newsletter</p>
+                    <form class="cr-footer__newsletter-form" id="cr-footer-newsletter" action="#" method="post" aria-label="Newsletter signup">
+                        <div class="cr-footer__newsletter-inner">
+                            <label for="cr-newsletter-email" class="visually-hidden">Email address</label>
+                            <input type="email" id="cr-newsletter-email" name="email" class="cr-footer__newsletter-input" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-primary cr-footer__newsletter-btn">Subscribe</button>
+                        </div>
+                        <p class="cr-footer__newsletter-hint small mt-2 mb-0">New music, merch drops, and Scripture. No spam.</p>
+                    </form>
+                </div>
+                <nav class="cr-footer__nav mb-4" aria-label="Footer navigation">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="music.html">Music</a>
+                    <a href="merch.html">Merch</a>
+                    <a href="tour.html">Tour</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer">Explore the Bible</a>
+                    <a href="gospel.html">The Gospel</a>
+                </nav>
+                <div class="cr-footer__contact mb-4">
+                    <a href="mailto:hello@cyrusreignsrecords.com" class="cr-footer__contact-link"><i class="fas fa-envelope me-2" aria-hidden="true"></i>hello@cyrusreignsrecords.com</a>
+                </div>
+                <div class="cr-footer__bottom">
+                    <p class="cr-footer__verse mb-2">&ldquo;The Lord is our righteousness.&rdquo; &mdash; Jeremiah 23:6</p>
+                    <p class="cr-footer__copy small mb-0">&copy; <span id="cr-footer-year"></span> Cyrus Reigns Records</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/tour.js"></script>
+</body>
+</html>

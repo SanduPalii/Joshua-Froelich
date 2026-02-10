@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Cyrus Reigns Records</title>
+    <meta name="description" content="Checkout — Cyrus Reigns Records merch. Secure payment via PayPal or card.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Manrope:wght@500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="cr-page-loading">
+    <div class="cr-skeleton-loader" id="cr-skeleton-loader" aria-hidden="true">
+        <span class="cr-skeleton-loader__bar"></span>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top cr-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/cyrus-reigns-records_logo.svg" alt="Cyrus Reigns Records" class="cr-nav-logo cr-nav-logo--dark" height="36" width="auto">
+                <img src="assets/images/cyrus-reigns-records_logo_black.svg" alt="Cyrus Reigns Records" class="cr-nav-logo cr-nav-logo--light" height="36" width="auto">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="cr-navbar__wrap">
+                    <ul class="navbar-nav cr-navbar__nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="music.html">Music</a></li>
+                        <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="gospel.html">The Gospel</a></li>
+                    </ul>
+                    <div class="cr-navbar__right">
+                        <div id="theme-toggle" class="cr-theme-toggle" role="switch" aria-checked="false" aria-label="Toggle theme" tabindex="0">
+                            <span class="cr-theme-toggle__icon cr-theme-toggle__sun" aria-hidden="true"><i class="fas fa-sun"></i></span>
+                            <span class="cr-theme-toggle__track"><span class="cr-theme-toggle__thumb"></span></span>
+                            <span class="cr-theme-toggle__icon cr-theme-toggle__moon" aria-hidden="true"><i class="fas fa-moon"></i></span>
+                        </div>
+                        <a href="tour.html" class="btn btn-primary btn-sm cr-btn-tour">Tour</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="flex-grow-1 cr-pattern-dots">
+        <div class="container pb-5">
+            <div class="cr-page-heading-wrap mb-4 text-center">
+                <h1 class="cr-section-title mb-2">Checkout</h1>
+                <p class="lead text-muted mb-0">Delivery, shipping, and payment.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <form id="checkout-form" class="cr-checkout-steps">
+                        <!-- Step 1: Delivery address -->
+                        <section class="card cr-border-gold mb-4" id="step-address">
+                            <div class="card-body">
+                                <h2 class="h5 mb-3">Delivery address</h2>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="cr-input-modern">
+                                            <label for="fullname" class="cr-input-modern__label">Full name <span class="text-danger">*</span></label>
+                                            <input type="text" class="cr-input-modern__input" id="fullname" name="fullname" required placeholder="e.g. John Smith">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="cr-input-modern cr-input-modern--select">
+                                            <label for="country" class="cr-input-modern__label">Country <span class="text-danger">*</span></label>
+                                            <select class="cr-input-modern__input cr-input-modern__select" id="country" name="country" required>
+                                                <option value="US" selected>United States</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="OTHER">Other International</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="cr-input-modern">
+                                            <label for="address1" class="cr-input-modern__label">Address line 1 <span class="text-danger">*</span></label>
+                                            <input type="text" class="cr-input-modern__input" id="address1" name="address1" required placeholder="e.g. 123 Main St">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="cr-input-modern">
+                                            <label for="address2" class="cr-input-modern__label">Address line 2 <span class="text-muted">(optional)</span></label>
+                                            <input type="text" class="cr-input-modern__input" id="address2" name="address2" placeholder="e.g. Apt 4">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="cr-input-modern">
+                                            <label for="city" class="cr-input-modern__label">City <span class="text-danger">*</span></label>
+                                            <input type="text" class="cr-input-modern__input" id="city" name="city" required placeholder="e.g. Nashville">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="cr-input-modern">
+                                            <label for="state" class="cr-input-modern__label">State / Province</label>
+                                            <input type="text" class="cr-input-modern__input" id="state" name="state" placeholder="e.g. TN">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="cr-input-modern">
+                                            <label for="zip" class="cr-input-modern__label">ZIP / Postal code <span class="text-danger">*</span></label>
+                                            <input type="text" class="cr-input-modern__input" id="zip" name="zip" required placeholder="e.g. 37201">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 2: Shipping -->
+                        <section class="card cr-border-gold mb-4" id="step-shipping">
+                            <div class="card-body">
+                                <h2 class="h5 mb-3">Shipping method</h2>
+                                <p class="small text-muted mb-3">Rates are for US (lower 48). Canada and international see options below.</p>
+                                <div class="cr-shipping-options">
+                                    <label class="cr-shipping-option border rounded p-3 d-block mb-2 cursor-pointer">
+                                        <input type="radio" name="shipping" value="us_standard" class="me-2" data-cost="5.99" checked>
+                                        <strong>US Standard</strong> — $5.99 <span class="text-muted small">(5–8 business days)</span>
+                                    </label>
+                                    <label class="cr-shipping-option border rounded p-3 d-block mb-2 cursor-pointer">
+                                        <input type="radio" name="shipping" value="us_priority" class="me-2" data-cost="9.99">
+                                        <strong>US Priority</strong> — $9.99 <span class="text-muted small">(2–4 business days)</span>
+                                    </label>
+                                    <label class="cr-shipping-option border rounded p-3 d-block mb-2 cursor-pointer">
+                                        <input type="radio" name="shipping" value="ca" class="me-2" data-cost="12.99">
+                                        <strong>Canada</strong> — $12.99 <span class="text-muted small">(7–14 business days)</span>
+                                    </label>
+                                    <label class="cr-shipping-option border rounded p-3 d-block cursor-pointer">
+                                        <input type="radio" name="shipping" value="international" class="me-2" data-cost="19.99">
+                                        <strong>International</strong> — $19.99 <span class="text-muted small">(10–21 business days)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Step 3: Payment -->
+                        <section class="card cr-border-gold mb-4" id="step-payment">
+                            <div class="card-body">
+                                <h2 class="h5 mb-3">Payment</h2>
+                                <p class="small text-muted mb-3">Pay securely with PayPal or use your credit/debit card through PayPal (no account required).</p>
+                                <div id="paypal-button-container" class="mb-3">
+                                    <!-- PayPal buttons will render here when you add your Client ID -->
+                                    <div class="cr-paypal-placeholder border rounded p-4 text-center">
+                                        <p class="mb-2"><i class="fab fa-paypal fa-2x text-muted"></i></p>
+                                        <p class="small mb-0">Pay with <strong>PayPal</strong> or <strong>credit/debit card</strong>.</p>
+                                        <p class="small text-muted mt-1">To enable live payments, add your PayPal Client ID in checkout.html.</p>
+                                    </div>
+                                </div>
+                                <p class="small text-muted mb-0"><i class="fas fa-lock me-1"></i> Your payment is secure. We do not store card details.</p>
+                            </div>
+                        </section>
+                    </form>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card cr-border-gold sticky-top cr-order-summary">
+                        <div class="card-body">
+                            <h2 class="h5 mb-3">Order summary</h2>
+                            <div id="order-items" class="cr-cart-drawer__body mb-0">
+                                <!-- Filled by JS from cart — same markup as cart drawer -->
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Subtotal</span>
+                                <span id="order-subtotal">$0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Shipping</span>
+                                <span id="order-shipping">$5.99</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span>Total</span>
+                                <span id="order-total">$0.00</span>
+                            </div>
+                            <a href="merch.html" class="btn btn-outline-secondary btn-sm mt-3 w-100">← Back to merch</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="cr-footer mt-auto">
+        <div class="cr-footer__bg" role="img" aria-hidden="true"></div>
+        <div class="cr-footer__top"></div>
+        <div class="container">
+            <div class="cr-footer__inner text-center">
+                <a href="index.html" class="cr-footer__logo-link" aria-label="Cyrus Reigns Records – Home">
+                    <img src="assets/images/cyrus-reigns-records_logo.svg" alt="" class="cr-footer__logo cr-footer__logo--dark" width="200" height="auto">
+                    <img src="assets/images/cyrus-reigns-records_logo_black.svg" alt="" class="cr-footer__logo cr-footer__logo--light" width="200" height="auto">
+                </a>
+                <p class="cr-footer__tagline">Reigning Over Darkness</p>
+                <div class="cr-footer__logo-divider" aria-hidden="true"></div>
+                <div class="cr-footer__social mb-4" aria-label="Social links">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                    <a href="https://music.apple.com" target="_blank" rel="noopener noreferrer" class="cr-footer__social-link" aria-label="Apple Music"><i class="fab fa-apple"></i></a>
+                </div>
+                <div class="cr-footer__newsletter">
+                    <p class="cr-footer__newsletter-title mb-2">Subscribe to our newsletter</p>
+                    <form class="cr-footer__newsletter-form" id="cr-footer-newsletter" action="#" method="post" aria-label="Newsletter signup">
+                        <div class="cr-footer__newsletter-inner">
+                            <label for="cr-newsletter-email" class="visually-hidden">Email address</label>
+                            <input type="email" id="cr-newsletter-email" name="email" class="cr-footer__newsletter-input" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-primary cr-footer__newsletter-btn">Subscribe</button>
+                        </div>
+                        <p class="cr-footer__newsletter-hint small mt-2 mb-0">New music, merch drops, and Scripture. No spam.</p>
+                    </form>
+                </div>
+                <nav class="cr-footer__nav mb-4" aria-label="Footer navigation">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="music.html">Music</a>
+                    <a href="merch.html">Merch</a>
+                    <a href="tour.html">Tour</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer">Explore the Bible</a>
+                    <a href="gospel.html">The Gospel</a>
+                </nav>
+                <div class="cr-footer__contact mb-4">
+                    <a href="mailto:hello@cyrusreignsrecords.com" class="cr-footer__contact-link"><i class="fas fa-envelope me-2" aria-hidden="true"></i>hello@cyrusreignsrecords.com</a>
+                </div>
+                <div class="cr-footer__bottom">
+                    <p class="cr-footer__verse mb-2">&ldquo;The Lord is our righteousness.&rdquo; &mdash; Jeremiah 23:6</p>
+                    <p class="cr-footer__copy small mb-0">&copy; <span id="cr-footer-year"></span> Cyrus Reigns Records</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/checkout.js"></script>
+</body>
+</html>
