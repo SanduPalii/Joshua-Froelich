@@ -188,7 +188,7 @@ This is a personal artist website. For bug reports or feature suggestions, pleas
 
 - **Website**: [joshuafroelich.com](#)
 - **Email**: [contact@joshuafroelich.com](#)
-- **Social Media**: [@cyrusreigns](#)
+- **Social Media**: [Facebook](https://web.facebook.com/joshuafroelich), [Instagram](https://www.instagram.com/joshuafroelich/), [YouTube](https://www.youtube.com/@cherifroelich2561)
 
 ## 🎵 About Cyrus Reigns
 

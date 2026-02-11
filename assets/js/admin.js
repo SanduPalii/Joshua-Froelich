@@ -164,6 +164,7 @@
                 '<div class="col-md-2">' +
                 '<span class="order-status ' + statusClass + '">' + escapeHtml(order.status || 'Pending') + '</span>' +
                 '<div class="small text-muted mt-1"><span class="badge badge-paid">' + escapeHtml(order.paymentStatus || 'Paid') + '</span></div>' +
+                '<div class="small text-muted mt-1">' + escapeHtml(order.paymentMethod || 'AtomOne') + '</div>' +
                 '</div>' +
                 '<div class="col-md-2 text-end">' +
                 '<button class="btn btn-sm btn-outline-primary" onclick="window.crAdmin.viewOrder(\'' + order.id + '\')">View</button>' +
@@ -180,6 +181,9 @@
         if (!order) return;
 
         currentOrder = order;
+        var paymentMethod = order.paymentMethod || 'AtomOne';
+        var paymentTxHash = order.payment && order.payment.txHash ? order.payment.txHash : '';
+        var paymentSenderWallet = order.payment && order.payment.senderWallet ? order.payment.senderWallet : '';
         var content = '<div class="order-detail">' +
             '<div class="row mb-4">' +
             '<div class="col-md-6">' +
@@ -202,7 +206,10 @@
             '<option value="Delivered"' + (order.status === 'Delivered' ? ' selected' : '') + '>Delivered</option>' +
             '</select>' +
             '</p>' +
+            '<p class="mb-1"><strong>Payment method:</strong> ' + escapeHtml(paymentMethod) + '</p>' +
             '<p class="mb-1"><strong>Payment:</strong> <span class="badge badge-paid">' + escapeHtml(order.paymentStatus || 'Paid') + '</span></p>' +
+            (paymentSenderWallet ? '<p class="mb-1"><strong>Sender wallet:</strong> <code>' + escapeHtml(paymentSenderWallet) + '</code></p>' : '') +
+            (paymentTxHash ? '<p class="mb-1"><strong>Tx hash:</strong> <code>' + escapeHtml(paymentTxHash) + '</code></p>' : '') +
             '</div>' +
             '</div>' +
 
@@ -293,6 +300,8 @@
         var order = currentOrder;
         var printWindow = window.open('', '_blank');
         var date = new Date(order.createdAt);
+        var paymentMethod = order.paymentMethod || 'AtomOne';
+        var paymentTxHash = order.payment && order.payment.txHash ? order.payment.txHash : '';
 
         var invoiceHTML = '<!DOCTYPE html><html><head>' +
             '<title>Invoice - ' + order.id + '</title>' +
@@ -308,7 +317,10 @@
             '<div class="invoice-header"><div><h1>Invoice</h1><p>Cyrus Reigns Records</p></div>' +
             '<div style="text-align:right;"><p><strong>Invoice #:</strong> ' + order.id + '</p>' +
             '<p><strong>Date:</strong> ' + date.toLocaleDateString() + '</p>' +
-            '<p><strong>Status:</strong> ' + order.paymentStatus + '</p></div></div>' +
+            '<p><strong>Status:</strong> ' + order.paymentStatus + '</p>' +
+            '<p><strong>Payment method:</strong> ' + paymentMethod + '</p>' +
+            (paymentTxHash ? '<p><strong>AtomOne tx hash:</strong> ' + paymentTxHash + '</p>' : '') +
+            '</div></div>' +
 
             '<div style="margin-bottom:30px;"><h3>Bill To:</h3>' +
             '<p>' + order.customer.fullname + '<br>' +
@@ -354,7 +366,7 @@
             return;
         }
 
-        var csv = 'Order ID,Date,Customer,Email,Address,City,State,ZIP,Country,Items,Quantity,Subtotal,Shipping,Tax,Total,Status,Payment Status,Tracking,Carrier,Notes\n';
+        var csv = 'Order ID,Date,Customer,Email,Address,City,State,ZIP,Country,Items,Quantity,Subtotal,Shipping,Tax,Total,Status,Payment Method,Payment Status,AtomOne Sender Wallet,AtomOne Tx Hash,Tracking,Carrier,Notes\n';
 
         orders.forEach(function (order) {
             var itemsSummary = order.items.map(function (item) {
@@ -378,7 +390,10 @@
                 (order.tax || 0).toFixed(2) + ',' +
                 order.total.toFixed(2) + ',' +
                 '"' + order.status + '",' +
+                '"' + (order.paymentMethod || 'AtomOne') + '",' +
                 '"' + order.paymentStatus + '",' +
+                '"' + ((order.payment && order.payment.senderWallet) || '') + '",' +
+                '"' + ((order.payment && order.payment.txHash) || '') + '",' +
                 '"' + (order.trackingNumber || '') + '",' +
                 '"' + (order.carrier || '') + '",' +
                 '"' + (order.notes || '').replace(/"/g, '""') + '"\n';

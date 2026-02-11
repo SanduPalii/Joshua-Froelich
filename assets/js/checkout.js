@@ -10,6 +10,8 @@
     'CA': 0.00,
     'OTHER': 0.00
   };
+  var ATOMONE_WALLET_ADDRESS = 'atone1r5dv24amcyvdxfcjjrw7m5ts324cavyu0fszgq';
+  var MIN_TX_HASH_LENGTH = 20;
 
   function generateOrderId() {
     var timestamp = Date.now();
@@ -27,8 +29,9 @@
       var orders = JSON.parse(localStorage.getItem(STORAGE_KEY_ORDERS) || '[]');
       orderData.id = generateOrderId();
       orderData.createdAt = new Date().toISOString();
-      orderData.status = 'Pending';
-      orderData.paymentStatus = 'Paid';
+      orderData.status = orderData.status || 'Pending';
+      orderData.paymentMethod = orderData.paymentMethod || 'AtomOne';
+      orderData.paymentStatus = orderData.paymentStatus || 'Awaiting AtomOne Confirmation';
       orderData.trackingNumber = '';
       orderData.carrier = '';
       orderData.notes = '';
@@ -197,14 +200,59 @@
     });
   }
 
-  function initCheckoutButton() {
-    // Handle PayPal placeholder click
-    var paypalPlaceholder = document.querySelector('.cr-paypal-placeholder');
-    if (paypalPlaceholder) {
-      paypalPlaceholder.style.cursor = 'pointer';
-      paypalPlaceholder.addEventListener('click', function () {
+  function setCopyFeedback(message, isError) {
+    var feedback = document.getElementById('atomone-copy-feedback');
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.classList.remove('text-success', 'text-danger');
+    feedback.classList.add(isError ? 'text-danger' : 'text-success');
+  }
+
+  function copyAtomOneWallet() {
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      navigator.clipboard.writeText(ATOMONE_WALLET_ADDRESS).then(function () {
+        setCopyFeedback('Wallet copied. Send AtomOne only (ATONE).', false);
+      }).catch(function () {
+        setCopyFeedback('Copy failed. Please copy the wallet manually.', true);
+      });
+      return;
+    }
+
+    var temp = document.createElement('textarea');
+    temp.value = ATOMONE_WALLET_ADDRESS;
+    temp.setAttribute('readonly', '');
+    temp.style.position = 'absolute';
+    temp.style.left = '-9999px';
+    document.body.appendChild(temp);
+    temp.select();
+
+    try {
+      document.execCommand('copy');
+      setCopyFeedback('Wallet copied. Send AtomOne only (ATONE).', false);
+    } catch (e) {
+      setCopyFeedback('Copy failed. Please copy the wallet manually.', true);
+    }
+
+    document.body.removeChild(temp);
+  }
+
+  function initAtomOnePaymentActions() {
+    var copyButton = document.getElementById('copy-atomone-wallet');
+    if (copyButton) {
+      copyButton.addEventListener('click', copyAtomOneWallet);
+    }
+
+    var form = document.getElementById('checkout-form');
+    if (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
         processOrder();
       });
+    }
+
+    var confirmButton = document.getElementById('atomone-submit-order');
+    if (confirmButton) {
+      confirmButton.addEventListener('click', processOrder);
     }
   }
 
@@ -218,24 +266,43 @@
       return;
     }
 
+    var senderWallet = (document.getElementById('atomone-sender-wallet').value || '').trim();
+    var txHash = (document.getElementById('atomone-tx-hash').value || '').trim();
+    if (!senderWallet) {
+      alert('Please add your sender wallet address.');
+      return;
+    }
+    if (txHash.length < MIN_TX_HASH_LENGTH) {
+      alert('Please add a valid AtomOne transaction hash.');
+      return;
+    }
+
     // Gather form data
     var formData = {
-      fullname: document.getElementById('fullname').value,
-      country: document.getElementById('country').value,
-      address1: document.getElementById('address1').value,
-      address2: document.getElementById('address2').value,
-      city: document.getElementById('city').value,
-      state: document.getElementById('state').value,
-      zip: document.getElementById('zip').value
+      fullname: (document.getElementById('fullname').value || '').trim(),
+      country: (document.getElementById('country').value || '').trim(),
+      address1: (document.getElementById('address1').value || '').trim(),
+      address2: (document.getElementById('address2').value || '').trim(),
+      city: (document.getElementById('city').value || '').trim(),
+      state: (document.getElementById('state').value || '').trim(),
+      zip: (document.getElementById('zip').value || '').trim()
     };
 
     // Get shipping method
     var selectedShipping = document.querySelector('input[name="shipping"]:checked');
+    if (!selectedShipping) {
+      alert('Please select a shipping method.');
+      return;
+    }
     var shippingCost = parseFloat(selectedShipping.dataset.cost || 5.99);
     var shippingMethod = selectedShipping.value;
 
     // Calculate totals
     var items = getCart();
+    if (items.length === 0) {
+      alert('Your cart is empty. Add at least one item before confirming payment.');
+      return;
+    }
     var subtotal = items.reduce(function (sum, item) {
       return sum + (item.price * item.quantity);
     }, 0);
@@ -252,7 +319,15 @@
         cost: shippingCost
       },
       tax: tax,
-      total: total
+      total: total,
+      paymentMethod: 'AtomOne',
+      paymentStatus: 'Awaiting AtomOne Confirmation',
+      payment: {
+        network: 'AtomOne',
+        recipientWallet: ATOMONE_WALLET_ADDRESS,
+        senderWallet: senderWallet,
+        txHash: txHash
+      }
     };
 
     // Save order
@@ -264,7 +339,7 @@
       if (window.crCartUpdate) window.crCartUpdate();
       
       // Show success message
-      alert('Order placed successfully!\n\nOrder ID: ' + savedOrder.id + '\n\nThank you for your order!\n\n(This is a demo. In production, PayPal payment would be processed here.)');
+      alert('AtomOne order submitted successfully!\n\nOrder ID: ' + savedOrder.id + '\nNetwork: AtomOne\nSender wallet: ' + senderWallet + '\nTx hash: ' + txHash + '\n\nWe will verify your payment on-chain.');
       
       // Redirect to merch page
       window.location.href = 'merch.html';
@@ -279,5 +354,5 @@
   }
   renderOrderSummary();
   initShippingListeners();
-  initCheckoutButton();
+  initAtomOnePaymentActions();
 })();
