@@ -1,0 +1,17 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation (optional - remove if you want docs in image)
+README.md
+CONTRIBUTING.md
+LICENSE
+
+# IDE & OS
+.vscode
+.idea
+.DS_Store
+
+# Node (if added later)
+node_modules

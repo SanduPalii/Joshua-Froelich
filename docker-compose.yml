@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: joshua-froelich
+    ports:
+      - "127.0.0.1:3001:80"
+    restart: unless-stopped

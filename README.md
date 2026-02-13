@@ -148,6 +148,25 @@ Access admin panel → Settings tab → Update tax percentages
 
 ## 📦 Deployment
 
+### Docker (VPS / Cloud Server)
+
+1. **On your VPS**, clone the repo and build:
+   ```bash
+   git clone https://github.com/yourusername/joshua-froelich.git
+   cd joshua-froelich
+   docker compose up -d --build
+   ```
+   The site will be available on port 80.
+
+2. **With custom domain / HTTPS** (recommended for production):
+   - Use a reverse proxy (nginx, Caddy, Traefik) in front of the container
+   - Or add Certbot/Let's Encrypt for SSL
+
+3. **Stop the container**:
+   ```bash
+   docker compose down
+   ```
+
 ### GitHub Pages (Static Hosting)
 ```bash
 # Push to GitHub
