@@ -204,7 +204,11 @@
         feedback.classList.remove('d-none');
         form.reset();
       } else {
-        feedback.textContent = 'Something went wrong. Please try again later.';
+        var msg = 'Something went wrong. Please try again later.';
+        if (data && data.reason) {
+          msg += ' (' + data.reason + ')';
+        }
+        feedback.textContent = msg;
         feedback.className = 'cr-contact-form-feedback alert alert-danger';
         feedback.classList.remove('d-none');
       }

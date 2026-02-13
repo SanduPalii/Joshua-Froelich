@@ -10,7 +10,7 @@
     'CA': 0.00,
     'OTHER': 0.00
   };
-  var ATOMONE_WALLET_ADDRESS = 'atone1r5dv24amcyvdxfcjjrw7m5ts324cavyu0fszgq';
+  var ATOMONE_WALLET_ADDRESS = 'atone1p42my5f2fja8dx4lf9j9y7wpfnqfuxpuuhulk4';
   var MIN_TX_HASH_LENGTH = 20;
 
   function generateOrderId() {

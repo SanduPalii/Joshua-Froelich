@@ -77,15 +77,14 @@ async function sendTelegramMessage(data) {
   );
 
   const results = await Promise.all(requests);
-  const allOk = results.every((r) => r.ok === true);
-  if (!allOk) {
-    results.forEach((r, i) => {
-      if (!r.ok) {
-        console.error('[contact] Telegram error:', r.description || 'error_code=' + r.error_code);
-      }
-    });
-  }
-  return allOk;
+  const anyOk = results.some((r) => r.ok === true);
+  const firstError = results.find((r) => !r.ok);
+  results.forEach((r) => {
+    if (!r.ok) {
+      console.error('[contact] Telegram error:', r.description || 'error_code=' + r.error_code);
+    }
+  });
+  return { success: anyOk, error: firstError ? (firstError.description || 'error_code=' + firstError.error_code) : null };
 }
 
 function sendJson(res, status, body) {
@@ -175,14 +174,19 @@ const server = http.createServer(async (req, res) => {
     }
 
     try {
-      const success = await sendTelegramMessage({
+      const result = await sendTelegramMessage({
         name,
         email,
         message,
         company: company || undefined,
         phone: phone || undefined
       });
-      sendJson(res, 200, { ok: success });
+      const ok = result.success;
+      const body = { ok };
+      if (!ok && result.error) {
+        body.reason = result.error;
+      }
+      sendJson(res, 200, body);
     } catch {
       sendJson(res, 500, { ok: false });
     }
