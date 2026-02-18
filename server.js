@@ -5,7 +5,7 @@
  */
 
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+  require('dotenv').config() 
 }
 const http = require('http');
 const fs = require('fs');
@@ -21,7 +21,7 @@ const CHAT_IDS = process.env.TELEGRAM_CHAT_IDS
   ? process.env.TELEGRAM_CHAT_IDS.split(',').map((id) => id.trim()).filter(Boolean)
   : [];
 
-// Rate limit: 5 requests per 10 minutes per IP
+
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateLimitMap = new Map();
