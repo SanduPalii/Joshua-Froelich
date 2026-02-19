@@ -31,6 +31,7 @@
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                         <li class="nav-item"><a class="nav-link active" href="music.html">Music</a></li>
                         <li class="nav-item"><a class="nav-link" href="merch.html">Merch</a></li>
+                        <li class="nav-item"><a class="nav-link" href="join.html">Join</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="gospel.html">The Gospel</a></li>
                     </ul>
@@ -127,34 +128,41 @@
         </div>
     </main>
 
-    <!-- EP format choice modal (CD vs Digital) -->
+    <!-- EP platform choice modal -->
     <div class="modal fade" id="cr-ep-format-modal" tabindex="-1" aria-labelledby="cr-ep-format-modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content cr-border-gold">
                 <div class="modal-header border-secondary">
-                    <h2 class="modal-title h5" id="cr-ep-format-modal-title">Choose format</h2>
+                    <h2 class="modal-title h5" id="cr-ep-format-modal-title">Choose platform</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-muted small mb-3">Select how you want the First EP — CD or digital download.</p>
+                    <p class="text-muted small mb-3">Pick where you want to listen and continue there.</p>
                     <div class="row g-3">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="card h-100 cr-border-gold">
                                 <div class="card-body text-center">
-                                    <p class="mb-1 fw-bold">First EP — CD</p>
-                                    <p class="small text-muted mb-2">Physical copy. Shipped to you.</p>
-                                    <p class="mb-2"><strong class="cr-merch-price">$12.00</strong></p>
-                                    <button type="button" class="btn btn-primary btn-sm w-100 cr-ep-add-format" data-cart-id="cd" data-cart-name="First EP — CD" data-cart-price="12" data-bs-dismiss="modal">Add to cart</button>
+                                    <p class="mb-1 fw-bold"><i class="fab fa-youtube me-1" aria-hidden="true"></i>YouTube</p>
+                                    <p class="small text-muted mb-2">Watch and listen on YouTube.</p>
+                                    <a href="https://www.youtube.com/channel/UCepBkCq38CtJiBGfgO_tq3g" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm w-100" data-bs-dismiss="modal">Open YouTube</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="card h-100 cr-border-gold">
                                 <div class="card-body text-center">
-                                    <p class="mb-1 fw-bold">First EP — Digital</p>
-                                    <p class="small text-muted mb-2">Download after purchase.</p>
-                                    <p class="mb-2"><strong class="cr-merch-price">$6.00</strong></p>
-                                    <button type="button" class="btn btn-primary btn-sm w-100 cr-ep-add-format" data-cart-id="ep-digital" data-cart-name="First EP — Digital" data-cart-price="6" data-bs-dismiss="modal">Add to cart</button>
+                                    <p class="mb-1 fw-bold"><i class="fab fa-spotify me-1" aria-hidden="true"></i>Spotify</p>
+                                    <p class="small text-muted mb-2">Open the EP on Spotify.</p>
+                                    <a href="https://open.spotify.com/album/4IKKSMJGSvT7149alJNv1h" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm w-100" data-bs-dismiss="modal">Open Spotify</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card h-100 cr-border-gold">
+                                <div class="card-body text-center">
+                                    <p class="mb-1 fw-bold"><i class="fab fa-apple me-1" aria-hidden="true"></i>Apple Music</p>
+                                    <p class="small text-muted mb-2">Open the EP on Apple Music.</p>
+                                    <a href="https://music.apple.com/es/album/the-coming-of-christs-kingdom-single/1877807393?l=en-GB" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm w-100" data-bs-dismiss="modal">Open Apple Music</a>
                                 </div>
                             </div>
                         </div>
@@ -198,6 +206,7 @@
                     <a href="about.html">About</a>
                     <a href="music.html">Music</a>
                     <a href="merch.html">Merch</a>
+                    <a href="join.html">Join</a>
                     <a href="tour.html">Tour</a>
                     <a href="contact.html">Contact</a>
                     <a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer">Explore the Bible</a>
@@ -214,14 +223,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/cart.js"></script>
-    <script>
-      document.querySelectorAll('.cr-ep-add-format').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          setTimeout(function () {
-            if (window.crCart && window.crCart.openDrawer) window.crCart.openDrawer();
-          }, 350);
-        });
-      });
-    </script>
 </body>
 </html>

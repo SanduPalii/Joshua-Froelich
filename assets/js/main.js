@@ -94,6 +94,140 @@
 
   // Scroll-in animation: add .cr-visible when element enters viewport
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Join page: tier videos play in a ping-pong loop (forward -> reverse -> forward)
+  function initPingPongPathwayVideos() {
+    var videos = document.querySelectorAll('.cr-pingpong-video');
+    if (!videos.length) return;
+
+    if (reduceMotion) {
+      videos.forEach(function (video) {
+        video.pause();
+        try { video.currentTime = 0; } catch (e) {}
+      });
+      return;
+    }
+
+    var videoStates = new WeakMap();
+    var frameIntervalMs = 66;
+
+    function getState(video) {
+      var state = videoStates.get(video);
+      if (!state) {
+        state = {
+          direction: 1,
+          rafId: 0,
+          lastTs: 0,
+          visible: false
+        };
+        videoStates.set(video, state);
+      }
+      return state;
+    }
+
+    function stop(video) {
+      var state = getState(video);
+      if (state.rafId) {
+        cancelAnimationFrame(state.rafId);
+        state.rafId = 0;
+      }
+      state.lastTs = 0;
+    }
+
+    function step(video, ts) {
+      var state = getState(video);
+      if (!state.visible || document.hidden) {
+        stop(video);
+        return;
+      }
+
+      var duration = video.duration;
+      if (!duration || !isFinite(duration)) {
+        state.rafId = requestAnimationFrame(function (nextTs) {
+          step(video, nextTs);
+        });
+        return;
+      }
+
+      if (!state.lastTs) state.lastTs = ts;
+      var elapsedMs = ts - state.lastTs;
+      if (elapsedMs < frameIntervalMs) {
+        state.rafId = requestAnimationFrame(function (nextTs) {
+          step(video, nextTs);
+        });
+        return;
+      }
+      var delta = Math.min(elapsedMs / 1000, 0.12);
+      state.lastTs = ts;
+      var speed = Number(video.dataset.pingpongSpeed || 1);
+      var nextTime = video.currentTime + (delta * speed * state.direction);
+
+      if (nextTime >= duration) {
+        nextTime = duration;
+        state.direction = -1;
+      } else if (nextTime <= 0) {
+        nextTime = 0;
+        state.direction = 1;
+      }
+
+      try {
+        video.currentTime = nextTime;
+      } catch (e) {}
+
+      state.rafId = requestAnimationFrame(function (nextTs) {
+        step(video, nextTs);
+      });
+    }
+
+    function start(video) {
+      var state = getState(video);
+      if (state.rafId) return;
+      video.pause();
+      state.lastTs = 0;
+      state.rafId = requestAnimationFrame(function (ts) {
+        step(video, ts);
+      });
+    }
+
+    function onVisible(video, isVisible) {
+      var state = getState(video);
+      state.visible = isVisible;
+      if (isVisible) start(video);
+      else stop(video);
+    }
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          onVisible(entry.target, entry.isIntersecting);
+        });
+      }, { threshold: 0.18 });
+
+      videos.forEach(function (video) {
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        observer.observe(video);
+      });
+    } else {
+      videos.forEach(function (video) {
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        onVisible(video, true);
+      });
+    }
+
+    document.addEventListener('visibilitychange', function () {
+      videos.forEach(function (video) {
+        var state = getState(video);
+        if (document.hidden) stop(video);
+        else if (state.visible) start(video);
+      });
+    });
+  }
+  initPingPongPathwayVideos();
+
   if (!reduceMotion) {
     var animated = document.querySelectorAll('.cr-animate-on-scroll');
     if (animated.length) {
@@ -151,6 +285,32 @@
     window.addEventListener('scroll', onAboutParallaxScroll, { passive: true });
     onAboutParallaxScroll();
   }
+  // Join page: hero + pathway tier background parallax
+  var pathwayBgs = document.querySelectorAll('.cr-pathway-hero__bg, .cr-pathway-tier__bg');
+  if (pathwayBgs.length && !reduceMotion) {
+    function onPathwayParallaxScroll() {
+      var h = window.innerHeight;
+      pathwayBgs.forEach(function (bg) {
+        var section = bg.closest('.cr-pathway-hero, .cr-pathway-tier');
+        if (!section) return;
+        var rect = section.getBoundingClientRect();
+        var sectionH = rect.height;
+        if (rect.bottom < 0 || rect.top > h) return;
+        var progress = (h - rect.top) / (h + sectionH);
+        progress = Math.max(0, Math.min(1, progress));
+        var offsetPx = -progress * 0.32 * h;
+        var tierVideo = bg.querySelector('.cr-pathway-tier__video');
+        if (tierVideo) {
+          var videoOffset = offsetPx * 0.2;
+          tierVideo.style.transform = 'translate3d(0, ' + videoOffset + 'px, 0) scale(1.04)';
+        } else {
+          bg.style.backgroundPosition = 'center ' + offsetPx + 'px';
+        }
+      });
+    }
+    window.addEventListener('scroll', onPathwayParallaxScroll, { passive: true });
+    onPathwayParallaxScroll();
+  }
 
   // Footer: parallax background (moves slower on scroll)
   var footerBg = document.querySelector('.cr-footer__bg');
@@ -203,70 +363,77 @@
     });
   }
 
-  // Hero typewriter: type phrase → blink cursor twice → delete → next phrase (one line)
+  // Hero typewriter: desktop loop + mobile ticker (left-to-right)
   var typewriterEl = document.getElementById('cr-hero-typewriter');
+  var typewriterPhrases = [
+    'DARKNESS TREMBLES',
+    'HIS REIGN. OUR ROAR.',
+    'NO OTHER KING',
+    'LIGHT CRUSHES DARKNESS',
+    'WHERE THE LION ROARS',
+    'CHAINS BREAK. GLORY FALLS.',
+    'WE SING. HE REIGNS.'
+  ];
+  var mobileTickerMode = window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
+
   if (typewriterEl && !reduceMotion) {
     var typewriterText = typewriterEl.querySelector('.cr-hero-typewriter__text');
     var typewriterCursor = typewriterEl.querySelector('.cr-hero-typewriter__cursor');
-    var phrases = [
-      'DARKNESS TREMBLES',
-      'HIS REIGN. OUR ROAR.',
-      'NO OTHER KING',
-      'LIGHT CRUSHES DARKNESS',
-      'WHERE THE LION ROARS',
-      'CHAINS BREAK. GLORY FALLS.',
-      'WE SING. HE REIGNS.'
-    ];
-    var typeSpeed = 85;
-    var deleteSpeed = 45;
-    var pauseAfterType = 600;
-    var blinkDuration = 550;
-    var phraseIndex = 0;
+    if (mobileTickerMode) {
+      if (typewriterText) typewriterText.textContent = typewriterPhrases.join('   •   ');
+      typewriterEl.classList.add('cr-hero-typewriter--ticker');
+    } else {
+      var typeSpeed = 85;
+      var deleteSpeed = 45;
+      var pauseAfterType = 600;
+      var blinkDuration = 550;
+      var phraseIndex = 0;
 
-    function blinkTwice(callback) {
-      if (!typewriterCursor) { callback(); return; }
-      typewriterCursor.classList.add('cr-hero-typewriter__cursor--off');
-      setTimeout(function () {
-        typewriterCursor.classList.remove('cr-hero-typewriter__cursor--off');
+      function blinkTwice(callback) {
+        if (!typewriterCursor) { callback(); return; }
+        typewriterCursor.classList.add('cr-hero-typewriter__cursor--off');
         setTimeout(function () {
-          typewriterCursor.classList.add('cr-hero-typewriter__cursor--off');
+          typewriterCursor.classList.remove('cr-hero-typewriter__cursor--off');
           setTimeout(function () {
-            typewriterCursor.classList.remove('cr-hero-typewriter__cursor--off');
-            callback();
+            typewriterCursor.classList.add('cr-hero-typewriter__cursor--off');
+            setTimeout(function () {
+              typewriterCursor.classList.remove('cr-hero-typewriter__cursor--off');
+              callback();
+            }, blinkDuration);
           }, blinkDuration);
         }, blinkDuration);
-      }, blinkDuration);
-    }
-
-    function typeChar(phrase, i, done) {
-      if (i >= phrase.length) {
-        setTimeout(function () { blinkTwice(done); }, pauseAfterType);
-        return;
       }
-      if (typewriterText) typewriterText.textContent += phrase[i];
-      setTimeout(function () { typeChar(phrase, i + 1, done); }, typeSpeed);
-    }
 
-    function deleteChar(len, done) {
-      if (len <= 0) {
-        setTimeout(done, deleteSpeed);
-        return;
+      function typeChar(phrase, i, done) {
+        if (i >= phrase.length) {
+          setTimeout(function () { blinkTwice(done); }, pauseAfterType);
+          return;
+        }
+        if (typewriterText) typewriterText.textContent += phrase[i];
+        setTimeout(function () { typeChar(phrase, i + 1, done); }, typeSpeed);
       }
-      if (typewriterText) typewriterText.textContent = typewriterText.textContent.slice(0, -1);
-      setTimeout(function () { deleteChar(len - 1, done); }, deleteSpeed);
-    }
 
-    function runCycle() {
-      var phrase = phrases[phraseIndex];
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      typeChar(phrase, 0, function () {
-        deleteChar(phrase.length, function () {
-          runCycle();
+      function deleteChar(len, done) {
+        if (len <= 0) {
+          setTimeout(done, deleteSpeed);
+          return;
+        }
+        if (typewriterText) typewriterText.textContent = typewriterText.textContent.slice(0, -1);
+        setTimeout(function () { deleteChar(len - 1, done); }, deleteSpeed);
+      }
+
+      function runCycle() {
+        var phrase = typewriterPhrases[phraseIndex];
+        phraseIndex = (phraseIndex + 1) % typewriterPhrases.length;
+        typeChar(phrase, 0, function () {
+          deleteChar(phrase.length, function () {
+            runCycle();
+          });
         });
-      });
-    }
+      }
 
-    runCycle();
+      runCycle();
+    }
   } else if (typewriterEl) {
     typewriterEl.classList.add('cr-hero-typewriter--static');
     var fallbackText = typewriterEl.querySelector('.cr-hero-typewriter__text');
